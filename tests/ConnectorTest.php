@@ -2,9 +2,9 @@
 
 namespace AXLMedia\LaravelSqsFifoQueue\Tests;
 
-use InvalidArgumentException;
-use AXLMedia\LaravelSqsFifoQueue\SqsFifoQueue;
 use AXLMedia\LaravelSqsFifoQueue\Queue\Connectors\SqsFifoConnector;
+use AXLMedia\LaravelSqsFifoQueue\SqsFifoQueue;
+use InvalidArgumentException;
 
 class ConnectorTest extends TestCase
 {

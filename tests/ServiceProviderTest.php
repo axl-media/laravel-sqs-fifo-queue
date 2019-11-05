@@ -2,12 +2,11 @@
 
 namespace AXLMedia\LaravelSqsFifoQueue\Tests;
 
+use AXLMedia\LaravelSqsFifoQueue\Contracts\Queue\Deduplicator;
+use AXLMedia\LaravelSqsFifoQueue\LaravelSqsFifoQueueServiceProvider;
+use AXLMedia\LaravelSqsFifoQueue\Queue\Connectors\SqsFifoConnector;
 use Illuminate\Container\Container;
 use Illuminate\Queue\QueueServiceProvider;
-use Illuminate\Events\EventServiceProvider;
-use AXLMedia\LaravelSqsFifoQueue\Contracts\Queue\Deduplicator;
-use AXLMedia\LaravelSqsFifoQueue\Queue\Connectors\SqsFifoConnector;
-use AXLMedia\LaravelSqsFifoQueue\LaravelSqsFifoQueueServiceProvider;
 
 class ServiceProviderTest extends TestCase
 {
