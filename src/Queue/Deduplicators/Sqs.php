@@ -12,8 +12,8 @@ class Sqs implements Deduplicator
      * This deduplicator should be used for queues where Amazon's
      * ContentBasedDeduplication features is enabled on SQS.
      *
-     * @param  string  $payload
-     * @param  string  $queue
+     * @param string $payload
+     * @param string $queue
      *
      * @return bool
      */

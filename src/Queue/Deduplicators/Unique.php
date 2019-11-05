@@ -2,8 +2,8 @@
 
 namespace AXLMedia\LaravelSqsFifoQueue\Queue\Deduplicators;
 
-use Ramsey\Uuid\Uuid;
 use AXLMedia\LaravelSqsFifoQueue\Contracts\Queue\Deduplicator;
+use Ramsey\Uuid\Uuid;
 
 class Unique implements Deduplicator
 {
@@ -13,8 +13,8 @@ class Unique implements Deduplicator
      * This deduplicator should be used for queues that should treat all messages
      * as unique, even if the payload is identical to another message.
      *
-     * @param  string  $payload
-     * @param  string  $queue
+     * @param string $payload
+     * @param string $queue
      *
      * @return string
      */

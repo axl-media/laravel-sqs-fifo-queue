@@ -2,16 +2,15 @@
 
 namespace AXLMedia\LaravelSqsFifoQueue;
 
-use LogicException;
 use Aws\Sqs\SqsClient;
-use BadMethodCallException;
-use InvalidArgumentException;
-use Illuminate\Queue\SqsQueue;
 use AXLMedia\LaravelSqsFifoQueue\Contracts\Queue\Deduplicator;
+use BadMethodCallException;
+use Illuminate\Queue\SqsQueue;
+use InvalidArgumentException;
+use LogicException;
 
 class SqsFifoQueue extends SqsQueue
 {
-
     /**
      * The message group id of the fifo pipe in the queue.
      *
@@ -29,11 +28,11 @@ class SqsFifoQueue extends SqsQueue
     /**
      * Create a new Amazon SQS queue instance.
      *
-     * @param  \Aws\Sqs\SqsClient  $sqs
-     * @param  string  $default
-     * @param  string  $prefix
-     * @param  string  $group
-     * @param  string  $deduplicator
+     * @param \Aws\Sqs\SqsClient $sqs
+     * @param string             $default
+     * @param string             $prefix
+     * @param string             $group
+     * @param string             $deduplicator
      *
      * @return void
      */
@@ -48,7 +47,7 @@ class SqsFifoQueue extends SqsQueue
     /**
      * Set the underlying SQS instance.
      *
-     * @param  \Aws\Sqs\SqsClient  $sqs
+     * @param \Aws\Sqs\SqsClient $sqs
      *
      * @return \AXLMedia\LaravelSqsFifoQueue\SqsFifoQueue
      */
@@ -62,9 +61,9 @@ class SqsFifoQueue extends SqsQueue
     /**
      * Push a raw payload onto the queue.
      *
-     * @param  string  $payload
-     * @param  string|null  $queue
-     * @param  array  $options
+     * @param string      $payload
+     * @param string|null $queue
+     * @param array       $options
      *
      * @return mixed
      */
@@ -86,14 +85,14 @@ class SqsFifoQueue extends SqsQueue
     /**
      * Push a new job onto the queue after a delay.
      *
-     * @param  \DateTime|int  $delay
-     * @param  string  $job
-     * @param  mixed  $data
-     * @param  string|null  $queue
-     *
-     * @return mixed
+     * @param \DateTime|int $delay
+     * @param string        $job
+     * @param mixed         $data
+     * @param string|null   $queue
      *
      * @throws BadMethodCallException
+     *
+     * @return mixed
      */
     public function later($delay, $job, $data = '', $queue = null)
     {
@@ -103,12 +102,12 @@ class SqsFifoQueue extends SqsQueue
     /**
      * Get the deduplication id for the given driver.
      *
-     * @param  string  $payload
-     * @param  string  $queue
-     *
-     * @return string|bool
+     * @param string $payload
+     * @param string $queue
      *
      * @throws InvalidArgumentException
+     *
+     * @return string|bool
      */
     protected function getDeduplicationId($payload, $queue)
     {
@@ -134,15 +133,15 @@ class SqsFifoQueue extends SqsQueue
     /**
      * Create a payload string from the given job and data.
      *
-     * @param  mixed  $job
-     * @param  mixed  $data
-     * @param  string|null  $queue
-     *
-     * @return string
+     * @param mixed       $job
+     * @param mixed       $data
+     * @param string|null $queue
      *
      * @throws \LogicException
      * @throws \InvalidArgumentException
      * @throws \Illuminate\Queue\InvalidPayloadException
+     *
+     * @return string
      */
     protected function createPayload($job, $data = '', $queue = null)
     {
@@ -174,8 +173,8 @@ class SqsFifoQueue extends SqsQueue
     /**
      * Append meta data to the payload for Laravel <= 5.3.
      *
-     * @param  string  $payload
-     * @param  mixed  $job
+     * @param string $payload
+     * @param mixed  $job
      *
      * @return string
      */
@@ -197,9 +196,9 @@ class SqsFifoQueue extends SqsQueue
     /**
      * Create a payload array from the given job and data.
      *
-     * @param  mixed  $job
-     * @param  mixed  $data
-     * @param  string|null  $queue
+     * @param mixed       $job
+     * @param mixed       $data
+     * @param string|null $queue
      *
      * @return array
      */
@@ -214,7 +213,7 @@ class SqsFifoQueue extends SqsQueue
     /**
      * Get the meta data to add to the payload.
      *
-     * @param  mixed  $job
+     * @param mixed $job
      *
      * @return array
      */
@@ -226,7 +225,7 @@ class SqsFifoQueue extends SqsQueue
 
         return array_filter(
             [
-                'group' => isset($job->messageGroupId) ? $job->messageGroupId : null,
+                'group'        => isset($job->messageGroupId) ? $job->messageGroupId : null,
                 'deduplicator' => isset($job->deduplicator) ? $job->deduplicator : null,
             ],
             function ($value) {
@@ -238,9 +237,9 @@ class SqsFifoQueue extends SqsQueue
     /**
      * Get additional meta from a payload string.
      *
-     * @param  string  $payload
-     * @param  string  $key
-     * @param  mixed  $default
+     * @param string $payload
+     * @param string $key
+     * @param mixed  $default
      *
      * @return mixed
      */

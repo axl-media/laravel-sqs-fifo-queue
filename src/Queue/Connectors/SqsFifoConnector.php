@@ -3,16 +3,16 @@
 namespace AXLMedia\LaravelSqsFifoQueue\Queue\Connectors;
 
 use Aws\Sqs\SqsClient;
-use InvalidArgumentException;
-use Illuminate\Queue\Connectors\SqsConnector;
 use AXLMedia\LaravelSqsFifoQueue\SqsFifoQueue;
+use Illuminate\Queue\Connectors\SqsConnector;
+use InvalidArgumentException;
 
 class SqsFifoConnector extends SqsConnector
 {
     /**
      * Establish a queue connection.
      *
-     * @param  array  $config
+     * @param array $config
      *
      * @return \Illuminate\Contracts\Queue\Queue
      */
@@ -43,7 +43,7 @@ class SqsFifoConnector extends SqsConnector
     /**
      * Get the default configuration for SQS.
      *
-     * @param  array  $config
+     * @param array $config
      *
      * @return array
      */
@@ -56,8 +56,8 @@ class SqsFifoConnector extends SqsConnector
 
         return array_merge([
             'version' => 'latest',
-            'http' => [
-                'timeout' => 60,
+            'http'    => [
+                'timeout'         => 60,
                 'connect_timeout' => 60,
             ],
         ], $config);

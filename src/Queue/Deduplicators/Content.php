@@ -12,8 +12,8 @@ class Content implements Deduplicator
      * This deduplicator should be used for queues that should treat
      * identical payloads as duplicate messages.
      *
-     * @param  string  $payload
-     * @param  string  $queue
+     * @param string $payload
+     * @param string $queue
      *
      * @return string
      */

@@ -2,11 +2,11 @@
 
 namespace AXLMedia\LaravelSqsFifoQueue;
 
-use Illuminate\Support\ServiceProvider;
+use AXLMedia\LaravelSqsFifoQueue\Queue\Connectors\SqsFifoConnector;
+use AXLMedia\LaravelSqsFifoQueue\Queue\Deduplicators\Content;
 use AXLMedia\LaravelSqsFifoQueue\Queue\Deduplicators\Sqs;
 use AXLMedia\LaravelSqsFifoQueue\Queue\Deduplicators\Unique;
-use AXLMedia\LaravelSqsFifoQueue\Queue\Deduplicators\Content;
-use AXLMedia\LaravelSqsFifoQueue\Queue\Connectors\SqsFifoConnector;
+use Illuminate\Support\ServiceProvider;
 
 class LaravelSqsFifoQueueServiceProvider extends ServiceProvider
 {
@@ -50,7 +50,7 @@ class LaravelSqsFifoQueueServiceProvider extends ServiceProvider
     /**
      * Register everything for the given manager.
      *
-     * @param  \Illuminate\Queue\QueueManager  $manager
+     * @param \Illuminate\Queue\QueueManager $manager
      *
      * @return void
      */
@@ -62,7 +62,7 @@ class LaravelSqsFifoQueueServiceProvider extends ServiceProvider
     /**
      * Register the connectors on the queue manager.
      *
-     * @param  \Illuminate\Queue\QueueManager  $manager
+     * @param \Illuminate\Queue\QueueManager $manager
      *
      * @return void
      */

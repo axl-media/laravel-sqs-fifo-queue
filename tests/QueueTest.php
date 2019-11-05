@@ -3,14 +3,13 @@
 namespace AXLMedia\LaravelSqsFifoQueue\Tests;
 
 use Aws\Result;
-use Mockery as m;
 use Aws\Sqs\SqsClient;
-use BadMethodCallException;
-use InvalidArgumentException;
 use AXLMedia\LaravelSqsFifoQueue\SqsFifoQueue;
 use AXLMedia\LaravelSqsFifoQueue\Tests\Fakes\Job;
 use AXLMedia\LaravelSqsFifoQueue\Tests\Fakes\StandardJob;
-use AXLMedia\LaravelSqsFifoQueue\Queue\Connectors\SqsFifoConnector;
+use BadMethodCallException;
+use InvalidArgumentException;
+use Mockery as m;
 
 class QueueTest extends TestCase
 {

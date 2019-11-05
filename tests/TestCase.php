@@ -2,16 +2,16 @@
 
 namespace AXLMedia\LaravelSqsFifoQueue\Tests;
 
-use Exception;
+use AXLMedia\LaravelSqsFifoQueue\LaravelSqsFifoQueueServiceProvider;
 use Dotenv\Dotenv;
-use ReflectionMethod;
-use ReflectionProperty;
+use Exception;
+use Illuminate\Encryption\Encrypter;
+use Illuminate\Queue\Capsule\Manager as Capsule;
 use Illuminate\Queue\Queue;
 use Illuminate\Queue\SqsQueue;
 use PHPUnit_Framework_TestCase;
-use Illuminate\Encryption\Encrypter;
-use Illuminate\Queue\Capsule\Manager as Capsule;
-use AXLMedia\LaravelSqsFifoQueue\LaravelSqsFifoQueueServiceProvider;
+use ReflectionMethod;
+use ReflectionProperty;
 
 class TestCase extends PHPUnit_Framework_TestCase
 {
@@ -128,22 +128,22 @@ class TestCase extends PHPUnit_Framework_TestCase
         }
 
         $queue->addConnection([
-            'driver' => 'sqs-fifo',
-            'key' => getenv('SQS_KEY'),
-            'secret' => getenv('SQS_SECRET'),
-            'prefix' => getenv('SQS_PREFIX'),
-            'queue' => $queueName,
-            'region' => getenv('SQS_REGION') ?: '',
-            'group' => 'default',
+            'driver'       => 'sqs-fifo',
+            'key'          => getenv('SQS_KEY'),
+            'secret'       => getenv('SQS_SECRET'),
+            'prefix'       => getenv('SQS_PREFIX'),
+            'queue'        => $queueName,
+            'region'       => getenv('SQS_REGION') ?: '',
+            'group'        => 'default',
             'deduplicator' => 'unique',
         ], 'sqs-fifo');
 
         $queue->addConnection([
-            'driver' => 'sqs-fifo',
-            'prefix' => getenv('SQS_PREFIX'),
-            'queue' => $queueName,
-            'region' => getenv('SQS_REGION') ?: '',
-            'group' => 'default',
+            'driver'       => 'sqs-fifo',
+            'prefix'       => getenv('SQS_PREFIX'),
+            'queue'        => $queueName,
+            'region'       => getenv('SQS_REGION') ?: '',
+            'group'        => 'default',
             'deduplicator' => 'unique',
         ], 'sqs-fifo-no-credentials');
     }
@@ -151,9 +151,9 @@ class TestCase extends PHPUnit_Framework_TestCase
     /**
      * Use reflection to call a restricted (private/protected) method on an object.
      *
-     * @param  object  $object
-     * @param  string  $method
-     * @param  array  $args
+     * @param object $object
+     * @param string $method
+     * @param array  $args
      *
      * @return mixed
      */
@@ -169,9 +169,9 @@ class TestCase extends PHPUnit_Framework_TestCase
      * Use reflection to set the value of a restricted (private/protected)
      * property on an object.
      *
-     * @param  object  $object
-     * @param  string  $property
-     * @param  mixed  $value
+     * @param object $object
+     * @param string $property
+     * @param mixed  $value
      *
      * @return void
      */

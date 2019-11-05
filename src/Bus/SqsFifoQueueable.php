@@ -21,7 +21,7 @@ trait SqsFifoQueueable
     /**
      * Set the desired message group id for the job.
      *
-     * @param  string  $messageGroupId
+     * @param string $messageGroupId
      *
      * @return $this
      */
@@ -35,7 +35,7 @@ trait SqsFifoQueueable
     /**
      * Set the desired deduplication method for the job.
      *
-     * @param  string  $deduplicator
+     * @param string $deduplicator
      *
      * @return $this
      */
