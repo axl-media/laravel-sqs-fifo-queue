@@ -1,9 +1,9 @@
 <?php
 
-namespace ShiftOneLabs\LaravelSqsFifoQueue\Tests;
+namespace AXLMedia\LaravelSqsFifoQueue\Tests;
 
-use ShiftOneLabs\LaravelSqsFifoQueue\Tests\Fakes\Job;
-use ShiftOneLabs\LaravelSqsFifoQueue\Tests\Fakes\StandardJob;
+use AXLMedia\LaravelSqsFifoQueue\Tests\Fakes\Job;
+use AXLMedia\LaravelSqsFifoQueue\Tests\Fakes\StandardJob;
 
 class IntegrationTest extends TestCase
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace ShiftOneLabs\LaravelSqsFifoQueue\Tests;
+namespace AXLMedia\LaravelSqsFifoQueue\Tests;
 
 use Exception;
 use Dotenv\Dotenv;
@@ -11,7 +11,7 @@ use Illuminate\Queue\SqsQueue;
 use PHPUnit_Framework_TestCase;
 use Illuminate\Encryption\Encrypter;
 use Illuminate\Queue\Capsule\Manager as Capsule;
-use ShiftOneLabs\LaravelSqsFifoQueue\LaravelSqsFifoQueueServiceProvider;
+use AXLMedia\LaravelSqsFifoQueue\LaravelSqsFifoQueueServiceProvider;
 
 class TestCase extends PHPUnit_Framework_TestCase
 {

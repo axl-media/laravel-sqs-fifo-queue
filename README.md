@@ -18,7 +18,7 @@ This package has been tested on Laravel 4.1 through Laravel 5.6, though it may c
 Via Composer
 
 ``` bash
-$ composer require shiftonelabs/laravel-sqs-fifo-queue
+$ composer require axl-media/laravel-sqs-fifo-queue
 ```
 
 Once composer has been updated and the package has been installed, the service provider will need to be loaded.
@@ -32,7 +32,7 @@ This package uses auto package discovery. The service provider will automaticall
 Open `config/app.php` and add following line to the providers array:
 
 ``` php
-ShiftOneLabs\LaravelSqsFifoQueue\LaravelSqsFifoQueueServiceProvider::class,
+AXLMedia\LaravelSqsFifoQueue\LaravelSqsFifoQueueServiceProvider::class,
 ```
 
 #### Laravel 4 (4.1, 4.2)
@@ -40,7 +40,7 @@ ShiftOneLabs\LaravelSqsFifoQueue\LaravelSqsFifoQueueServiceProvider::class,
 Open `app/config/app.php` and add following line to the providers array:
 
 ``` php
-'ShiftOneLabs\LaravelSqsFifoQueue\LaravelSqsFifoQueueServiceProvider',
+'AXLMedia\LaravelSqsFifoQueue\LaravelSqsFifoQueueServiceProvider',
 ```
 
 #### Lumen 5 (5.0, 5.1, 5.2, 5.3, 5.4, 5.5, 5.6)
@@ -48,7 +48,7 @@ Open `app/config/app.php` and add following line to the providers array:
 Open `bootstrap/app.php` and add following line under the "Register Service Providers" section:
 
 ``` php
-$app->register(ShiftOneLabs\LaravelSqsFifoQueue\LaravelSqsFifoQueueServiceProvider::class);
+$app->register(AXLMedia\LaravelSqsFifoQueue\LaravelSqsFifoQueueServiceProvider::class);
 ```
 
 ## Configuration
@@ -124,7 +124,7 @@ If using the `illuminate\queue` component Capsule outside of Lumen/Laravel:
 
 ``` php
 use Illuminate\Queue\Capsule\Manager as Queue;
-use ShiftOneLabs\LaravelSqsFifoQueue\LaravelSqsFifoQueueServiceProvider;
+use AXLMedia\LaravelSqsFifoQueue\LaravelSqsFifoQueueServiceProvider;
 
 $queue = new Queue;
 
@@ -200,7 +200,7 @@ To delay a job, you must `push()` the job to an SQS FIFO queue that has been def
 
 #### Per-Job Group and Deduplicator
 
-If you need to change the group or the deduplicator for a specific job, you will need access to the `onMessageGroup()` and `withDeduplicator()` methods. These methods are provided through the `ShiftOneLabs\LaravelSqsFifoQueue\Bus\SqsFifoQueueable` trait. Once you add this trait to your job class, you can change the group and/or the deduplicator for that specific job without affecting any other jobs on the queue.
+If you need to change the group or the deduplicator for a specific job, you will need access to the `onMessageGroup()` and `withDeduplicator()` methods. These methods are provided through the `AXLMedia\LaravelSqsFifoQueue\Bus\SqsFifoQueueable` trait. Once you add this trait to your job class, you can change the group and/or the deduplicator for that specific job without affecting any other jobs on the queue.
 
 #### Code Example
 
@@ -215,7 +215,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use ShiftOneLabs\LaravelSqsFifoQueue\Bus\SqsFifoQueueable;
+use AXLMedia\LaravelSqsFifoQueue\Bus\SqsFifoQueueable;
 
 class ProcessCoin implements ShouldQueue
 {
@@ -241,13 +241,13 @@ The deduplicators work by generating a deduplication id that is sent to the queu
 
 If you have some custom logic that needs to be used to generate the deduplication id, you can register your own custom deduplicator. The deduplicators are stored in the IoC container with the prefix `queue.sqs-fifo.deduplicator`. So, for example, the `unique` deduplicator is aliased to `queue.sqs-fifo.deduplicator.unique`.
 
-Custom deduplicators are created by registering a new prefixed alias in the IoC. This alias should resolve to a new object instance that implements the `ShiftOneLabs\LaravelSqsFifoQueue\Contracts\Queue\Deduplicator` contract. You can either define a new class that implements this contract, or you can create a new `ShiftOneLabs\LaravelSqsFifoQueue\Queue\Deduplicators\Callback` instance, which takes a `Closure` that performs the deduplication logic. The defined `Closure` should take two parameters: `$payload` and `$queue`, where `$payload` is the `json_encoded()` message to send to the queue, and `$queue` is the name of the queue to which the message is being sent. The generated id must not be more than 128 characters, and can contain alphanumeric characters and punctuation (``!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~``).
+Custom deduplicators are created by registering a new prefixed alias in the IoC. This alias should resolve to a new object instance that implements the `AXLMedia\LaravelSqsFifoQueue\Contracts\Queue\Deduplicator` contract. You can either define a new class that implements this contract, or you can create a new `AXLMedia\LaravelSqsFifoQueue\Queue\Deduplicators\Callback` instance, which takes a `Closure` that performs the deduplication logic. The defined `Closure` should take two parameters: `$payload` and `$queue`, where `$payload` is the `json_encoded()` message to send to the queue, and `$queue` is the name of the queue to which the message is being sent. The generated id must not be more than 128 characters, and can contain alphanumeric characters and punctuation (``!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~``).
 
 So, for example, if you wanted to create a `random` deduplicator that would randomly select some jobs to be duplicates, you could add the following line in the `register()` method of your `AppServiceProvider`:
 
 ``` php
 $this->app->bind('queue.sqs-fifo.deduplicator.random', function ($app) {
-    return new \ShiftOneLabs\LaravelSqsFifoQueue\Queue\Deduplicators\Callback(function ($payload, $queue) {
+    return new \AXLMedia\LaravelSqsFifoQueue\Queue\Deduplicators\Callback(function ($payload, $queue) {
         // Return the deduplication id generated for messages. Randomly 0 or 1.
         return mt_rand(0,1);
     });
@@ -259,7 +259,7 @@ Or, if you prefer to create a new class, your class would look like this:
 ``` php
 namespace App\Deduplicators;
 
-use ShiftOneLabs\LaravelSqsFifoQueue\Contracts\Queue\Deduplicator;
+use AXLMedia\LaravelSqsFifoQueue\Contracts\Queue\Deduplicator;
 
 class Random implements Deduplicator
 {
@@ -285,7 +285,7 @@ Contributions are welcome. Please see [CONTRIBUTING](CONTRIBUTING.md) for detail
 
 ## Security
 
-If you discover any security related issues, please email patrick@shiftonelabs.com instead of using the issue tracker.
+If you discover any security related issues, please email alex.g@axl.media instead of using the issue tracker.
 
 ## Credits
 
@@ -296,17 +296,17 @@ If you discover any security related issues, please email patrick@shiftonelabs.c
 
 The MIT License (MIT). Please see [License File](LICENSE.txt) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/shiftonelabs/laravel-sqs-fifo-queue.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/axl-media/laravel-sqs-fifo-queue.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/shiftonelabs/laravel-sqs-fifo-queue/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/shiftonelabs/laravel-sqs-fifo-queue.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/shiftonelabs/laravel-sqs-fifo-queue.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/shiftonelabs/laravel-sqs-fifo-queue.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/axl-media/laravel-sqs-fifo-queue/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/axl-media/laravel-sqs-fifo-queue.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/axl-media/laravel-sqs-fifo-queue.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/axl-media/laravel-sqs-fifo-queue.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/shiftonelabs/laravel-sqs-fifo-queue
-[link-travis]: https://travis-ci.org/shiftonelabs/laravel-sqs-fifo-queue
-[link-scrutinizer]: https://scrutinizer-ci.com/g/shiftonelabs/laravel-sqs-fifo-queue/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/shiftonelabs/laravel-sqs-fifo-queue
-[link-downloads]: https://packagist.org/packages/shiftonelabs/laravel-sqs-fifo-queue
+[link-packagist]: https://packagist.org/packages/axl-media/laravel-sqs-fifo-queue
+[link-travis]: https://travis-ci.org/axl-media/laravel-sqs-fifo-queue
+[link-scrutinizer]: https://scrutinizer-ci.com/g/axl-media/laravel-sqs-fifo-queue/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/axl-media/laravel-sqs-fifo-queue
+[link-downloads]: https://packagist.org/packages/axl-media/laravel-sqs-fifo-queue
 [link-author]: https://github.com/patrickcarlohickman
 [link-contributors]: ../../contributors

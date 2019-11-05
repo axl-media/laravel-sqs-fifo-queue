@@ -1,13 +1,13 @@
 <?php
 
-namespace ShiftOneLabs\LaravelSqsFifoQueue\Tests;
+namespace AXLMedia\LaravelSqsFifoQueue\Tests;
 
 use Illuminate\Container\Container;
 use Illuminate\Queue\QueueServiceProvider;
 use Illuminate\Events\EventServiceProvider;
-use ShiftOneLabs\LaravelSqsFifoQueue\Contracts\Queue\Deduplicator;
-use ShiftOneLabs\LaravelSqsFifoQueue\Queue\Connectors\SqsFifoConnector;
-use ShiftOneLabs\LaravelSqsFifoQueue\LaravelSqsFifoQueueServiceProvider;
+use AXLMedia\LaravelSqsFifoQueue\Contracts\Queue\Deduplicator;
+use AXLMedia\LaravelSqsFifoQueue\Queue\Connectors\SqsFifoConnector;
+use AXLMedia\LaravelSqsFifoQueue\LaravelSqsFifoQueueServiceProvider;
 
 class ServiceProviderTest extends TestCase
 {

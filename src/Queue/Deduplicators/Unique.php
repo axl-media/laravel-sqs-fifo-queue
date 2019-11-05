@@ -1,9 +1,9 @@
 <?php
 
-namespace ShiftOneLabs\LaravelSqsFifoQueue\Queue\Deduplicators;
+namespace AXLMedia\LaravelSqsFifoQueue\Queue\Deduplicators;
 
 use Ramsey\Uuid\Uuid;
-use ShiftOneLabs\LaravelSqsFifoQueue\Contracts\Queue\Deduplicator;
+use AXLMedia\LaravelSqsFifoQueue\Contracts\Queue\Deduplicator;
 
 class Unique implements Deduplicator
 {

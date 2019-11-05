@@ -1,16 +1,16 @@
 <?php
 
-namespace ShiftOneLabs\LaravelSqsFifoQueue\Tests;
+namespace AXLMedia\LaravelSqsFifoQueue\Tests;
 
 use Aws\Result;
 use Mockery as m;
 use Aws\Sqs\SqsClient;
 use BadMethodCallException;
 use InvalidArgumentException;
-use ShiftOneLabs\LaravelSqsFifoQueue\SqsFifoQueue;
-use ShiftOneLabs\LaravelSqsFifoQueue\Tests\Fakes\Job;
-use ShiftOneLabs\LaravelSqsFifoQueue\Tests\Fakes\StandardJob;
-use ShiftOneLabs\LaravelSqsFifoQueue\Queue\Connectors\SqsFifoConnector;
+use AXLMedia\LaravelSqsFifoQueue\SqsFifoQueue;
+use AXLMedia\LaravelSqsFifoQueue\Tests\Fakes\Job;
+use AXLMedia\LaravelSqsFifoQueue\Tests\Fakes\StandardJob;
+use AXLMedia\LaravelSqsFifoQueue\Queue\Connectors\SqsFifoConnector;
 
 class QueueTest extends TestCase
 {
@@ -316,7 +316,7 @@ class QueueTest extends TestCase
     protected function bind_custom_deduplicator()
     {
         $this->app->bind('queue.sqs-fifo.deduplicator.custom', function () {
-            return new \ShiftOneLabs\LaravelSqsFifoQueue\Queue\Deduplicators\Callback(function ($payload, $queue) {
+            return new \AXLMedia\LaravelSqsFifoQueue\Queue\Deduplicators\Callback(function ($payload, $queue) {
                 return 'custom';
             });
         });

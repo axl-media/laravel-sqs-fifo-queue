@@ -1,13 +1,13 @@
 <?php
 
-namespace ShiftOneLabs\LaravelSqsFifoQueue;
+namespace AXLMedia\LaravelSqsFifoQueue;
 
 use LogicException;
 use Aws\Sqs\SqsClient;
 use BadMethodCallException;
 use InvalidArgumentException;
 use Illuminate\Queue\SqsQueue;
-use ShiftOneLabs\LaravelSqsFifoQueue\Contracts\Queue\Deduplicator;
+use AXLMedia\LaravelSqsFifoQueue\Contracts\Queue\Deduplicator;
 
 class SqsFifoQueue extends SqsQueue
 {
@@ -50,7 +50,7 @@ class SqsFifoQueue extends SqsQueue
      *
      * @param  \Aws\Sqs\SqsClient  $sqs
      *
-     * @return \ShiftOneLabs\LaravelSqsFifoQueue\SqsFifoQueue
+     * @return \AXLMedia\LaravelSqsFifoQueue\SqsFifoQueue
      */
     public function setSqs(SqsClient $sqs)
     {
