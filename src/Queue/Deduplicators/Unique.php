@@ -2,8 +2,8 @@
 
 namespace AXLMedia\LaravelSqsFifoQueue\Queue\Deduplicators;
 
-use Ramsey\Uuid\Uuid;
 use AXLMedia\LaravelSqsFifoQueue\Contracts\Queue\Deduplicator;
+use Ramsey\Uuid\Uuid;
 
 class Unique implements Deduplicator
 {

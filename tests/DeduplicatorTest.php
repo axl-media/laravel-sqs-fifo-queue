@@ -2,10 +2,10 @@
 
 namespace AXLMedia\LaravelSqsFifoQueue\Tests;
 
+use AXLMedia\LaravelSqsFifoQueue\Queue\Deduplicators\Callback;
+use AXLMedia\LaravelSqsFifoQueue\Queue\Deduplicators\Content;
 use AXLMedia\LaravelSqsFifoQueue\Queue\Deduplicators\Sqs;
 use AXLMedia\LaravelSqsFifoQueue\Queue\Deduplicators\Unique;
-use AXLMedia\LaravelSqsFifoQueue\Queue\Deduplicators\Content;
-use AXLMedia\LaravelSqsFifoQueue\Queue\Deduplicators\Callback;
 
 class DeduplicatorTest extends TestCase
 {

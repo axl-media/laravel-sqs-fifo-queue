@@ -2,16 +2,15 @@
 
 namespace AXLMedia\LaravelSqsFifoQueue;
 
-use LogicException;
 use Aws\Sqs\SqsClient;
-use BadMethodCallException;
-use InvalidArgumentException;
-use Illuminate\Queue\SqsQueue;
 use AXLMedia\LaravelSqsFifoQueue\Contracts\Queue\Deduplicator;
+use BadMethodCallException;
+use Illuminate\Queue\SqsQueue;
+use InvalidArgumentException;
+use LogicException;
 
 class SqsFifoQueue extends SqsQueue
 {
-
     /**
      * The message group id of the fifo pipe in the queue.
      *
@@ -148,7 +147,7 @@ class SqsFifoQueue extends SqsQueue
     {
         $payload = parent::createPayload($job, $data, $queue);
 
-        if (!is_object($job)) {
+        if (! is_object($job)) {
             return $payload;
         }
 
@@ -220,7 +219,7 @@ class SqsFifoQueue extends SqsQueue
      */
     protected function getMetaPayload($job)
     {
-        if (!is_object($job)) {
+        if (! is_object($job)) {
             return [];
         }
 

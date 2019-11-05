@@ -3,9 +3,9 @@
 namespace AXLMedia\LaravelSqsFifoQueue\Queue\Connectors;
 
 use Aws\Sqs\SqsClient;
-use InvalidArgumentException;
-use Illuminate\Queue\Connectors\SqsConnector;
 use AXLMedia\LaravelSqsFifoQueue\SqsFifoQueue;
+use Illuminate\Queue\Connectors\SqsConnector;
+use InvalidArgumentException;
 
 class SqsFifoConnector extends SqsConnector
 {
@@ -20,11 +20,11 @@ class SqsFifoConnector extends SqsConnector
     {
         $config = $this->getDefaultConfiguration($config);
 
-        if (!ends_with($config['queue'], '.fifo')) {
+        if (! ends_with($config['queue'], '.fifo')) {
             throw new InvalidArgumentException('FIFO queue name must end in ".fifo"');
         }
 
-        if (!empty($config['key']) && !empty($config['secret'])) {
+        if (! empty($config['key']) && ! empty($config['secret'])) {
             $config['credentials'] = array_only($config, ['key', 'secret']);
         }
 

@@ -3,14 +3,13 @@
 namespace AXLMedia\LaravelSqsFifoQueue\Tests;
 
 use Aws\Result;
-use Mockery as m;
 use Aws\Sqs\SqsClient;
-use BadMethodCallException;
-use InvalidArgumentException;
 use AXLMedia\LaravelSqsFifoQueue\SqsFifoQueue;
 use AXLMedia\LaravelSqsFifoQueue\Tests\Fakes\Job;
 use AXLMedia\LaravelSqsFifoQueue\Tests\Fakes\StandardJob;
-use AXLMedia\LaravelSqsFifoQueue\Queue\Connectors\SqsFifoConnector;
+use BadMethodCallException;
+use InvalidArgumentException;
+use Mockery as m;
 
 class QueueTest extends TestCase
 {
@@ -67,7 +66,7 @@ class QueueTest extends TestCase
         $closure = function ($message) use ($deduplication) {
             $deduplicator = $this->app->make('queue.sqs-fifo.deduplicator.'.$deduplication);
             $deduplicationId = $deduplicator->generate($message['MessageBody'], null);
-            if (!array_key_exists('MessageDeduplicationId', $message) || $deduplicationId != $message['MessageDeduplicationId']) {
+            if (! array_key_exists('MessageDeduplicationId', $message) || $deduplicationId != $message['MessageDeduplicationId']) {
                 return false;
             }
 
@@ -88,7 +87,7 @@ class QueueTest extends TestCase
     {
         $job = new Job();
         $closure = function ($message) {
-            if (!array_key_exists('MessageDeduplicationId', $message)) {
+            if (! array_key_exists('MessageDeduplicationId', $message)) {
                 return false;
             }
 
@@ -132,7 +131,7 @@ class QueueTest extends TestCase
         $job = 'test';
         $deduplication = 'unique';
         $closure = function ($message) {
-            if (!preg_match('/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i', $message['MessageDeduplicationId'])) {
+            if (! preg_match('/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i', $message['MessageDeduplicationId'])) {
                 return false;
             }
 

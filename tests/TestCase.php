@@ -2,16 +2,16 @@
 
 namespace AXLMedia\LaravelSqsFifoQueue\Tests;
 
-use Exception;
+use AXLMedia\LaravelSqsFifoQueue\LaravelSqsFifoQueueServiceProvider;
 use Dotenv\Dotenv;
-use ReflectionMethod;
-use ReflectionProperty;
+use Exception;
+use Illuminate\Encryption\Encrypter;
+use Illuminate\Queue\Capsule\Manager as Capsule;
 use Illuminate\Queue\Queue;
 use Illuminate\Queue\SqsQueue;
 use PHPUnit_Framework_TestCase;
-use Illuminate\Encryption\Encrypter;
-use Illuminate\Queue\Capsule\Manager as Capsule;
-use AXLMedia\LaravelSqsFifoQueue\LaravelSqsFifoQueueServiceProvider;
+use ReflectionMethod;
+use ReflectionProperty;
 
 class TestCase extends PHPUnit_Framework_TestCase
 {
@@ -83,11 +83,11 @@ class TestCase extends PHPUnit_Framework_TestCase
     {
         // Laravel >= 4.2 && <= 5.2 need an encrypter instance to create the connection.
         if (method_exists(Queue::class, 'setEncrypter')) {
-            if (!defined('MCRYPT_RIJNDAEL_128')) {
+            if (! defined('MCRYPT_RIJNDAEL_128')) {
                 define('MCRYPT_RIJNDAEL_128', 'rijndael-128');
             }
 
-            if (!defined('MCRYPT_MODE_CBC')) {
+            if (! defined('MCRYPT_MODE_CBC')) {
                 define('MCRYPT_MODE_CBC', 'cbc');
             }
 
@@ -123,7 +123,7 @@ class TestCase extends PHPUnit_Framework_TestCase
         $queueName = getenv('SQS_QUEUE') ?: 'queuename.fifo';
 
         // Laravel <= 5.0 doesn't use the prefix key. It must be prepended to the queue name.
-        if (!property_exists(SqsQueue::class, 'prefix')) {
+        if (! property_exists(SqsQueue::class, 'prefix')) {
             $queueName = getenv('SQS_PREFIX').'/'.$queueName;
         }
 

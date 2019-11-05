@@ -2,8 +2,8 @@
 
 namespace AXLMedia\LaravelSqsFifoQueue\Queue\Deduplicators;
 
-use Closure;
 use AXLMedia\LaravelSqsFifoQueue\Contracts\Queue\Deduplicator;
+use Closure;
 
 class Callback implements Deduplicator
 {

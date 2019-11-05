@@ -2,11 +2,11 @@
 
 namespace AXLMedia\LaravelSqsFifoQueue;
 
-use Illuminate\Support\ServiceProvider;
+use AXLMedia\LaravelSqsFifoQueue\Queue\Connectors\SqsFifoConnector;
+use AXLMedia\LaravelSqsFifoQueue\Queue\Deduplicators\Content;
 use AXLMedia\LaravelSqsFifoQueue\Queue\Deduplicators\Sqs;
 use AXLMedia\LaravelSqsFifoQueue\Queue\Deduplicators\Unique;
-use AXLMedia\LaravelSqsFifoQueue\Queue\Deduplicators\Content;
-use AXLMedia\LaravelSqsFifoQueue\Queue\Connectors\SqsFifoConnector;
+use Illuminate\Support\ServiceProvider;
 
 class LaravelSqsFifoQueueServiceProvider extends ServiceProvider
 {
